@@ -1,0 +1,77 @@
+﻿@model Semana06.Models.Producto
+
+@{
+    ViewBag.Title = "Seleccionar";
+}
+<style>
+    .div-tienda {
+        width: 49%;
+        height: auto;
+        float: left;
+        border-left: 1px solid;
+        border-right: 1px solid;
+    }
+
+    main {
+        width: 100%;
+        height: auto;
+        float: left;
+    }
+</style>
+<h2>Seleccionar</h2>
+<main>
+    <h4>Producto</h4>
+    <div class="div-tienda">
+
+        <hr />
+        <dl class="dl-horizontal">
+            <dt>
+                @Html.DisplayNameFor(model => model.idproducto)
+            </dt>
+
+            <dd>
+                @Html.DisplayFor(model => model.idproducto)
+            </dd>
+
+            <dt>
+                @Html.DisplayNameFor(model => model.descripcion)
+            </dt>
+
+            <dd>
+                @Html.DisplayFor(model => model.descripcion)
+            </dd>
+
+            <dt>
+                @Html.DisplayNameFor(model => model.precio)
+            </dt>
+
+            <dd>
+                @Html.DisplayFor(model => model.precio)
+            </dd>
+
+            <dt>
+                @Html.DisplayNameFor(model => model.stock)
+            </dt>
+
+            <dd>
+                @Html.DisplayFor(model => model.stock)
+            </dd>
+
+        </dl>
+    </div>
+    <div class="div-tienda">
+        <img src="@Url.Content(String.Format("~/imagenes/{0}.jpg",Model.idproducto))" />
+    </div>
+</main>
+<div id="div-cantidad">
+    @using (Html.BeginForm("Agregar", "ECommerce", FormMethod.Post))
+    {
+        @Html.Hidden("id", Model.idproducto)
+        <em>Ingrese la Cantidad</em>
+        @Html.TextBox("cantidad", 1)
+        <button>Procesar</button>
+    }
+</div>
+<div>
+    @ViewBag.mensaje
+</div>

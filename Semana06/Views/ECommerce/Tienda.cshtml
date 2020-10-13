@@ -1,0 +1,90 @@
+﻿@model IEnumerable<Semana06.Models.Producto>
+
+@{
+    ViewBag.Title = "Tienda";
+}
+<style>
+    body {
+        margin: 0;
+        padding: 0;
+        background-color: gray;
+    }
+
+    #portal {
+        width: 94%;
+        height: auto;
+        float: left;
+        margin: 0 3% 0 3%;
+        background-color: white;
+        display:flex;
+        flex-wrap: wrap;
+    }
+
+    .item-producto {
+        width: 30.5%;
+        height: auto;
+        margin: 1%;
+        box-shadow: 2px 2px 4px 2px rgb(130,130,130);
+        padding: 1em;
+    }
+
+    img {
+        width:90%;
+        display:block;
+        margin: 1em auto;
+    }
+    em{
+        color: rgb(120,120,120)
+    }
+</style>
+
+<h2>Tienda</h2>
+<div>
+    @Html.ActionLink("Ver la Canasta", "Canasta", new
+{
+    @class
+           = "btn btn-default"
+})
+</div>
+<div id="portal">
+    
+    <table class="table">
+        <tr>
+            <th>
+                @Html.DisplayNameFor(model => model.idproducto)
+            </th>
+            <th>
+                @Html.DisplayNameFor(model => model.descripcion)
+            </th>
+            <th>
+                @Html.DisplayNameFor(model => model.precio)
+            </th>
+            <th>
+                @Html.DisplayNameFor(model => model.stock)
+            </th>
+            <th></th>
+        </tr>
+
+        @foreach (var item in Model)
+        {
+            <div class="item-producto">
+                <em>Codigo:</em>@Html.DisplayFor(modelItem => item.idproducto)
+                <br />
+                <em>Descripcion:</em>@Html.DisplayFor(modelItem => item.descripcion)
+                <br />
+                <em>Precio:</em>@Html.DisplayFor(modelItem => item.precio)
+                <br />
+                <em>Stock Disponible:</em>@Html.DisplayFor(modelItem => item.stock)
+                <br />
+                <img src="@Url.Content(String.Format("~/imagenes/{0}.jpg",item.idproducto))" />
+                @Html.ActionLink("Agregar al carrito", "Seleccionar", new { id = item.idproducto }, new
+                {
+                    @class
+           = "btn btn-default"
+                })
+            </div>
+
+        }
+
+    </table>
+</div>
